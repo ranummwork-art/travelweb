@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WHERE TO? | 나의 여행 성향 테스트</title>
+<style>
+:root{--ink:#183b38;--green:#285e50;--cream:#f7f5ee;--orange:#e98c57;--muted:#777f78}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--cream);font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif}
+button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 7%;border-bottom:1px solid #e4e2d8}
+.logo{font-weight:900;letter-spacing:2px}.header-note{font-size:12px;color:var(--muted)}
+main{max-width:850px;min-height:75vh;margin:auto;padding:35px 22px 70px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--green)}
+h1{font-size:clamp(38px,8vw,66px);line-height:1.08;letter-spacing:-2px;margin:18px 0}
+h2{letter-spacing:-1px;line-height:1.4}p{line-height:1.8}.muted{color:var(--muted)}
+.hero{padding:45px 0 25px;display:grid;grid-template-columns:1.15fr .85fr;gap:25px;align-items:center}
+.hero-art{min-height:310px;border-radius:180px 180px 18px 18px;position:relative;overflow:hidden;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 70%,#f5c18b 0 12%,transparent 13%),radial-gradient(ellipse at 35% 58%,#e2aa73 0 16%,transparent 17%),linear-gradient(165deg,#d8e5d8 0 30%,#78a99a 30% 52%,#e8bc87 52% 65%,#4c847b 65% 100%)}
+.sun{position:absolute;width:76px;height:76px;background:#f7d9a0;border-radius:50%;top:36px;right:37px}.stamp{z-index:1;padding:13px 17px;background:#fffaf0e8;border:1px solid white;transform:rotate(-8deg);font-size:12px;letter-spacing:3px;font-weight:900}
+.btn{border:0;border-radius:999px;background:var(--green);color:white;padding:15px 23px;font-weight:750;transition:.2s}.btn:hover{transform:translateY(-2px);background:#1d483d}
+.btn.secondary{background:transparent;color:var(--green);border:1px solid #c9d1c8}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}.full{width:100%}
+.features{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0}.pill{border:1px solid #d9ded5;padding:9px 13px;border-radius:99px;font-size:12px;background:#fffdf7}
+.panel{background:#fffdf8;border:1px solid #e7e5db;border-radius:22px;padding:25px}
+.progress-meta{display:flex;justify-content:space-between;font-size:12px;margin-bottom:12px}.progress{height:5px;background:#e7e9e1;border-radius:10px;overflow:hidden;margin-bottom:30px}.progress>div{height:100%;background:var(--orange);transition:width .3s}
+.answers{display:grid;gap:11px;margin:25px 0}.answer{display:flex;align-items:center;text-align:left;gap:14px;padding:17px;background:#fff;border:1px solid #e2e5dc;border-radius:14px;color:var(--ink);transition:.18s}.answer:hover,.answer.selected{border-color:var(--green);background:#edf3ec}
+.letter{display:grid;place-items:center;flex-shrink:0;width:32px;height:32px;border-radius:50%;background:#f0efe7;font-size:12px;font-weight:800}.answer.selected .letter{background:var(--green);color:white}
+.nav-buttons{display:flex;gap:10px;justify-content:space-between}.nav-buttons button{flex:1}
+.result-cover{padding:35px 25px;border-radius:22px;background:linear-gradient(140deg,#dce9df,#f4d9b5);text-align:center;margin-bottom:18px}.country-emoji{font-size:66px}.result-cover h1{font-size:clamp(35px,7vw,55px);margin:12px 0}.result-cover p{margin:0}
+.section-title{font-size:13px;font-weight:850}.reason-list{padding-left:20px;line-height:1.9}.reason-list li{padding:4px 0}.result-footer{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.hidden{display:none!important}footer{padding:24px;text-align:center;color:var(--muted);border-top:1px solid #e4e2d8;font-size:11px}
+.guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.guide-card{padding:20px;border:1px solid #e7e5db;border-radius:18px;background:#fffdf8;min-width:0}.guide-icon{font-size:28px;margin-bottom:12px}.guide-label{font-size:11px;font-weight:850;letter-spacing:1.5px;color:#658174}.guide-card h3{font-size:19px;line-height:1.45;margin:8px 0}.guide-card p{font-size:13px;line-height:1.8;margin:7px 0}.duration-card{background:#e9f0e6;border-color:#d6e3d4}.duration-number{font-size:30px;font-weight:850;letter-spacing:-1px;margin:10px 0}.neighbor-list{display:grid;gap:10px;margin-top:15px}.neighbor-item{padding:15px;background:#f5f3eb;border-radius:13px}.neighbor-item h3{margin:0 0 5px;font-size:16px}.neighbor-item p{margin:4px 0;font-size:13px;line-height:1.7}.source-note{font-size:11px;color:var(--muted)}
+@media(max-width:580px){header{padding:18px 20px}.hero{grid-template-columns:1fr;padding-top:25px}.hero-art{min-height:200px}main{padding:22px 17px 45px}}
+@media(max-width:480px){.guide-grid,.result-footer{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="logo">WHERE TO? <span style="color:#e98c57">✳</span></div><div class="header-note">YOUR PERSONAL TRAVEL COMPASS</div></header>
+<main>
+<section id="home">
+ <div class="hero"><div><div class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</div><h1>세상은 넓고,<br>너의 여행은<br>특별하니까.</h1><p class="muted">당신의 취향과 여행 방식을 분석해<br>지금의 당신에게 어울리는 나라를 찾아드립니다.</p><div class="features"><span class="pill">7개의 질문</span><span class="pill">100개 해외 여행지</span><span class="pill">약 2분 소요</span></div><button class="btn" onclick="startQuiz()">내 여행지 찾기 →</button></div><div class="hero-art" role="img" aria-label="따뜻한 색감의 여행 풍경"><div class="sun"></div><div class="stamp">PASSPORT TO YOU</div></div></div>
+ <div class="panel"><div class="eyebrow">FOUR WAYS TO SEE THE WORLD</div><div class="features"><span class="pill">문화와 역사</span><span class="pill">자연과 탐험</span><span class="pill">휴식과 여유</span><span class="pill">모험과 발견</span></div><p class="muted" style="font-size:13px">정답은 없습니다. 평소의 취향과 가장 가까운 답을 골라보세요.</p></div>
+</section>
+<section id="quiz" class="hidden"><div class="eyebrow">FIND YOUR TRAVEL DNA</div><div class="panel" style="margin-top:16px"><div class="progress-meta"><span id="question-number">QUESTION 01 / 07</span><span id="percent">14%</span></div><div class="progress"><div id="progress-bar" style="width:14%"></div></div><div class="eyebrow" id="question-category"></div><h2 id="question-title"></h2><p class="muted" id="question-subtitle"></p><div id="answers" class="answers"></div><div class="nav-buttons"><button class="btn secondary" id="back-button" onclick="previousQuestion()">← 이전</button><button class="btn" id="next-button" onclick="nextQuestion()" disabled>다음 →</button></div></div></section>
+<section id="result" class="hidden"><div class="eyebrow">YOUR PERSONAL TRAVEL DESTINATION</div><div class="result-cover" style="margin-top:16px"><div class="eyebrow">YOUR TRAVEL MATCH</div><div id="result-emoji" class="country-emoji">🌍</div><h1 id="result-country"></h1><p id="result-tagline"></p></div>
+<div class="panel"><div class="eyebrow">YOUR TRAVEL PROFILE</div><h2 id="result-type"></h2><p id="result-description"></p><div class="features" id="result-tags"></div></div>
+<div class="panel" style="margin-top:14px"><div class="section-title">WHY THIS COUNTRY?</div><ul id="result-reasons" class="reason-list"></ul></div>
+<div class="guide-grid">
+ <div class="guide-card"><div class="guide-icon">📍</div><div class="guide-label">PERSONALIZED LANDMARK</div><h3 id="guide-landmark"></h3><p id="guide-landmark-description"></p></div>
+ <div class="guide-card"><div class="guide-icon">🍜</div><div class="guide-label">YOUR LOCAL FOOD</div><h3 id="guide-food"></h3><p id="guide-food-description"></p></div>
+ <div class="guide-card"><div class="guide-icon">🎭</div><div class="guide-label">CULTURE & EXPERIENCE</div><h3 id="guide-culture"></h3><p id="guide-culture-description"></p></div>
+ <div class="guide-card duration-card"><div class="guide-icon">🗓️</div><div class="guide-label">RECOMMENDED DURATION</div><div id="guide-duration" class="duration-number"></div><p id="guide-duration-description"></p></div>
+</div>
+<div class="panel" style="margin-top:14px"><div class="eyebrow">NEARBY DESTINATIONS</div><h2>여행을 확장해 볼까요?</h2><p class="muted" style="font-size:13px">같은 여행 성향에 잘 맞는 주변 국가를 추천합니다. 실제 이동 경로와 입국 조건을 확인하세요.</p><div id="neighbor-list" class="neighbor-list"></div></div>
+<p class="source-note">여행지 데이터는 공식 관광청 및 UNESCO 세계유산 자료를 참고해 구성한 큐레이션입니다. 기간은 일반적인 계획 범위이며 실시간 교통·비자·안전 정보가 아닙니다.</p>
+<p class="source-note">참고 자료:
+<a href="https://whc.unesco.org/en/list/" target="_blank" rel="noopener">UNESCO 세계유산 목록</a> ·
+<a href="https://www.japan.travel/en/things-to-do/attraction/" target="_blank" rel="noopener">일본정부관광국</a> ·
+<a href="https://www.france.fr/en/activities/" target="_blank" rel="noopener">프랑스 공식 관광 안내</a> ·
+<a href="https://www.italia.it/en" target="_blank" rel="noopener">이탈리아 공식 관광 안내</a> ·
+<a href="https://www.tourismthailand.org/" target="_blank" rel="noopener">태국 관광청</a> ·
+<a href="https://www.spain.info/en/" target="_blank" rel="noopener">스페인 공식 관광 안내</a>.
+100개 국가의 개별 명소·음식·체험을 전부 동일한 수준으로 공식 출처와 교차 검증한 데이터베이스는 아니며, 일부 항목은 국가별 대표 관광 정보에 기반한 편집 추천입니다.</p>
+<div class="result-footer"><button class="btn" onclick="restartQuiz()">다시 테스트하기 ↻</button><button class="btn secondary" onclick="shareResult()">결과 공유하기 ↗</button></div>
+</section>
+</main><footer>WHERE TO? · FIND A PLACE THAT FEELS LIKE YOU</footer>
+<script>
+const types={
+ culture:{name:"컬처 컬렉터",emoji:"🏛️",tagline:"이야기가 있는 곳에서 영감을 얻는 여행자",description:"당신은 역사, 예술, 건축, 현지 음식과 사람들의 이야기에 매력을 느낍니다.",tags:["역사와 예술","로컬 맛집","도시 산책"],reasons:["새로운 문화를 직접 경험하는 것을 선호합니다.","장소에 담긴 이야기와 현지의 일상을 중요하게 생각합니다."],travel:"박물관과 유적지를 둘러보고 현지 시장과 골목을 천천히 탐방해 보세요."},
+ nature:{name:"네이처 드리머",emoji:"🌿",tagline:"자연 속에서 나만의 세계를 발견하는 여행자",description:"당신은 웅장한 풍경, 맑은 공기, 푸른 숲과 바다에서 에너지를 얻습니다.",tags:["산과 바다","풍경 감상","아웃도어"],reasons:["자연 풍경과 야외 활동을 중요하게 생각합니다.","새로운 풍경을 만나는 것을 좋아합니다."],travel:"국립공원, 해안 산책로, 전망대처럼 자연을 가까이에서 경험해 보세요."},
+ relax:{name:"슬로우 트래블러",emoji:"🌊",tagline:"여유로운 순간을 가장 소중하게 여기는 여행자",description:"당신에게 여행은 바쁜 일상에서 벗어나 나를 돌보는 시간입니다.",tags:["휴식과 여유","해변과 리조트","느긋한 일정"],reasons:["여행 중 충분한 휴식과 여유를 중요하게 생각합니다.","편안한 환경에서 풍경과 분위기를 즐깁니다."],travel:"숙소에서 쉬는 시간도 일정에 포함하고 해변과 카페를 중심으로 여유롭게 움직여 보세요."},
+ adventure:{name:"어드벤처 시커",emoji:"🧭",tagline:"익숙함을 벗어나 새로운 경험을 찾는 여행자",description:"당신은 새로운 활동과 예상하지 못한 발견에서 즐거움을 얻습니다.",tags:["새로운 도전","액티비티","즉흥적인 발견"],reasons:["새로운 활동과 도전을 즐기는 성향입니다.","색다른 경험과 발견에 열려 있습니다."],travel:"하이킹, 현지 체험, 액티비티와 자유 탐방을 적절히 섞어 보세요."}
+};
+const questions=[
+{title:"여행을 떠나는 가장 큰 이유는?",subtitle:"이번 여행에서 가장 얻고 싶은 것을 골라보세요.",category:"YOUR MOTIVATION",options:[["culture","역사와 문화를 배우고 새로운 시각을 얻고 싶다"],["nature","일상에서 벗어나 멋진 자연을 보고 싶다"],["relax","아무 걱정 없이 쉬면서 재충전하고 싶다"],["adventure","평소에 하지 못한 새로운 경험을 하고 싶다"]]},
+{title:"이상적인 하루는 어떤 모습인가요?",subtitle:"아침부터 저녁까지 상상해 보세요.",category:"YOUR PERFECT DAY",options:[["culture","박물관, 골목, 맛집을 돌며 도시를 탐험한다"],["nature","산이나 호수를 바라보며 자연 속을 걷는다"],["relax","늦잠을 자고 카페와 해변에서 느긋하게 보낸다"],["adventure","액티비티를 즐기고 새로운 장소에 도전한다"]]},
+{title:"어떤 풍경이 가장 마음을 끄나요?",subtitle:"사진 한 장만 고를 수 있다면?",category:"YOUR SCENERY",options:[["culture","오래된 건축물과 역사적인 거리"],["nature","웅장한 산맥과 푸른 숲"],["relax","햇빛이 반짝이는 에메랄드빛 바다"],["adventure","사막, 협곡 또는 낯선 오지"]]},
+{title:"여행지에서 무엇을 먹고 싶나요?",subtitle:"음식도 여행의 중요한 경험입니다.",category:"YOUR TASTE",options:[["culture","현지 전통 요리와 오래된 맛집"],["nature","지역 식재료를 활용한 신선한 음식"],["relax","바닷가에서 즐기는 여유로운 식사"],["adventure","평소 접하지 못한 낯선 현지 음식"]]},
+{title:"여행 계획은 어떻게 세우는 편인가요?",subtitle:"실제 나의 모습과 가장 가까운 것을 고르세요.",category:"YOUR TRAVEL RHYTHM",options:[["culture","가보고 싶은 명소와 문화 일정을 정리한다"],["nature","풍경 좋은 장소와 산책 코스를 찾아둔다"],["relax","숙소와 꼭 필요한 일정만 정하고 여유를 둔다"],["adventure","큰 틀만 정하고 현지에서 즉흥적으로 움직인다"]]},
+{title:"여행에서 가장 중요하게 생각하는 것은?",subtitle:"하나만 포기해야 한다면 가장 아쉬운 것은?",category:"YOUR PRIORITY",options:[["culture","그 나라만의 역사와 독특한 문화"],["nature","일상에서 보기 힘든 아름다운 풍경"],["relax","편안한 숙소와 여유로운 시간"],["adventure","잊지 못할 도전과 특별한 경험"]]},
+{title:"여행을 마치고 어떤 기분으로 돌아오고 싶나요?",subtitle:"마지막 질문입니다.",category:"YOUR TRAVEL MEMORY",options:[["culture","새로운 문화를 이해하고 시야가 넓어진 기분"],["nature","자연의 아름다움을 충분히 느낀 기분"],["relax","몸과 마음이 편안하게 회복된 기분"],["adventure","내가 한 단계 성장하고 용감해진 기분"]]}
+];
+/*
+  100개 국가 데이터 스키마:
+  각 국가에는 성향별 attraction / food / experience를 4개씩 명시하고,
+  duration 및 주변 국가를 함께 기록합니다.
+  명소는 국가의 알려진 관광지·자연 지역을 바탕으로 성향에 맞춰 선별한 큐레이션입니다.
+  음식·체험은 지역적 특징을 반영한 추천이며, 개별 영업정보나 여행 가능 여부는 별도 확인이 필요합니다.
+*/
+const rawCountries = [
+["브라질","살바도르 펠로리뉴","이과수 국립공원","플로리아노폴리스 해변","렌소이스 마라녠시스 탐험","바이아 전통 요리·아카라제","아마존 지역 식재료 요리","해안 해산물·아사이","현지 시장의 향토 음식","아프로브라질 역사·음악 탐방","폭포와 열대 자연 탐방","해변 산책과 느긋한 식사","가이드 동반 사구·습지 탐험","10~14일",["아르헨티나","콜롬비아","페루","볼리비아"]],
+["프랑스","파리","베르동 협곡","코트다쥐르 해안","샤모니·몽블랑 트레일","크루아상·지역 치즈","프로방스 제철 요리","해안 해산물","산악 지역 요리","미술관·역사 지구","시골 시장·프로방스 산책","해안 카페","가이드 산악 하이킹","7~10일",["스위스","이탈리아","스페인","벨기에"]],
+["이탈리아","폼페이 유적","돌로미티","풀리아 해안","에트나 화산","파스타·지역 전통 요리","산악 치즈·감자 요리","해산물·젤라토","시칠리아 향토 음식","고대 유적 탐방","돌로미티 산책","남부 해안 휴식","가이드 화산 탐방","7~12일",["프랑스","스위스","오스트리아","슬로베니아"]],
+["일본","교토 히가시야마","가미코치","오키나와 케라마 제도","후지산 등산로","가이세키·소바","산간 제철 요리","오키나와 소바·과일","지역 시장 음식","다도·사찰 탐방","알프스 계곡 산책","온천·섬 해변","산악 트레킹","5~10일",["중국","필리핀"]],
+["스페인","그라나다 알함브라","피코스 데 에우로파","마요르카 해안","피레네 산맥 트레일","타파스·전통 요리","산악 지역 요리","해산물 타파스","지역 시장 음식","역사 지구·건축 탐방","국립공원 하이킹","해안 카페","산악 트레킹","7~10일",["프랑스","포르투갈","모로코"]],
+["그리스","아테네 아크로폴리스","올림포스 산","낙소스 해변","크레타 협곡 트레킹","무사카·전통 메제","올리브·산지 요리","섬 해산물","크레타 지역 음식","고대 유적·마을 탐방","산악 마을 산책","해변과 타베르나","협곡 하이킹","7~10일",["튀르키예","불가리아","알바니아"]],
+["이집트","룩소르 신전","화이트 데저트","홍해 다합","시나이 산 트레킹","코샤리·전통 음식","오아시스 요리","홍해 해산물","현지 시장 음식","고대 유적 가이드","사막 지형 탐방","홍해 해변 휴식","사막 가이드 탐험","7~10일",["요르단","이스라엘"]],
+["튀르키예","이스탄불 역사 지구","카파도키아 계곡","안탈리아 해안","리키아 웨이 트레일","케밥·메제","아나톨리아 지역 음식","에게해 해산물","현지 시장 길거리 음식","모스크·시장 탐방","계곡 산책","지중해 해안 휴식","장거리 트레킹","7~10일",["그리스","불가리아","조지아"]],
+["인도","자이푸르 시티 팰리스","히말라야 산악 지역","케랄라 해안","라다크 트레킹","탈리·지역 커리","산악 지역 모모","케랄라 해산물 요리","지역 길거리 음식","궁전·시장 탐방","산악 마을 산책","아유르베다 웰니스","고산 트레킹","10~14일",["네팔","부탄","스리랑카"]],
+["중국","시안 병마용","장자제 국립삼림공원","하이난 해변","호도협 트레킹","지역별 딤섬·면 요리","윈난 버섯 요리","하이난 해산물","야시장 음식 탐방","역사 유적·전통 정원","산악 풍경 탐방","해안 리조트 휴식","협곡 하이킹","8~14일",["일본","몽골","베트남","라오스"]],
+["포르투갈","리스본 벨렝 지구","페네다-제레스 국립공원","알가르브 해안","아조레스 화산 트레일","바칼라우·파스텔 드 나타","산악 치즈·수프","해안 생선 요리","지역 시장 음식","항구 도시·타일 예술","국립공원 산책","해변 마을 휴식","화산섬 하이킹","5~8일",["스페인"]],
+["오스트리아","빈 역사 지구","호에타우에른 국립공원","잘츠카머구트 호수","티롤 산악 트레일","슈니첼·사과 슈트루델","알프스 산장 음식","호숫가 카페 음식","산악 지역 전통 음식","클래식 음악·궁전","호수 산책","온천·호숫가 휴식","알프스 하이킹","5~8일",["독일","체코","헝가리","스위스","이탈리아","슬로베니아"]],
+["독일","베를린 박물관섬","바이에른 알프스","뤼겐 섬 해안","작센 스위스 트레일","소시지·프레첼","산악 지역 음식","북해 해산물","지역 맥주·시장 음식","박물관·역사 도시","숲길 걷기","해안 휴식","암벽·하이킹 코스","6~9일",["프랑스","벨기에","네덜란드","오스트리아","체코","폴란드","스위스"]],
+["체코","프라하 구시가지","보헤미안 스위스 국립공원","카를로비바리 온천","모라비아 카르스트","스비치코바·전통 요리","숲속 지역 음식","온천 도시 카페","현지 펍 음식","중세 건축·성 탐방","사암 지형 산책","온천 휴식","동굴·트레킹 탐험","4~7일",["독일","오스트리아","폴란드","슬로바키아"]],
+["폴란드","크라쿠프 구시가지","타트라 국립공원","소포트 해변","오이추프 국립공원 트레일","피에로기·주렉","산악 치즈·수프","발트해 생선 요리","현지 시장 음식","역사 광장·박물관","타트라 산책","발트해 해변","산악 트레킹","5~8일",["독일","체코","슬로바키아","리투아니아"]],
+["헝가리","부다페스트 성 지구","부크 국립공원","벌러톤 호수","필리시 산맥 트레일","굴라시·랑고시","숲 지역 전통 요리","호숫가 음식","시장 음식","온천·역사 건축","숲길 산책","온천과 호수 휴식","산악 트레킹","4~6일",["오스트리아","슬로바키아","슬로베니아","크로아티아","루마니아","세르비아"]],
+["벨기에","브뤼헤 구시가지","아르덴 숲","오스텐더 해안","아르덴 하이킹 코스","와플·초콜릿·홍합","숲 지역 음식","해안 홍합 요리","현지 맥주·시장","중세 도시 탐방","숲길 산책","해안 카페","산림 트레킹","3~5일",["프랑스","네덜란드","독일","룩셈부르크"]],
+["네덜란드","암스테르담 운하 지구","호헤 펠뤼버 국립공원","제이란트 해안","텍셀 섬 자전거 코스","스트룹와플·청어","숲 지역 치즈","해안 해산물","시장 음식","운하·미술관 탐방","국립공원 자전거","해변 산책","섬 자전거 탐험","4~6일",["벨기에","독일"]],
+["영국","런던 타워·박물관 지구","레이크 디스트릭트","콘월 해안","스노도니아 산악 트레일","피시앤칩스·파이","산악 펍 음식","해안 크림티","지역 펍 음식","역사 유적·극장","호수 트레킹","해안 마을 휴식","산악 하이킹","7~10일",["아일랜드"]],
+["아일랜드","더블린 트리니티 칼리지","킬라니 국립공원","딩글 반도","위클로 웨이 트레일","아이리시 스튜·소다 브레드","농촌 전통 음식","해안 수프·해산물","펍 전통 음식","문학·전통 음악","호수와 숲 산책","해안 마을 여유","장거리 하이킹","5~8일",["영국"]],
+["멕시코","치첸이트사","코퍼 캐니언","툴룸 해변","시에라 노르테 트레킹","타코·몰레","산악 지역 옥수수 요리","유카탄 해산물","시장 타코 탐방","마야 유적·공예","협곡 풍경 감상","카리브 해변 휴식","산악 마을 트레킹","8~12일",["과테말라"]],
+["페루","쿠스코 역사 지구","와스카란 국립공원","파라카스 해안","잉카 트레일","세비체·로모 살타도","안데스 감자 요리","해안 세비체","현지 시장 음식","잉카 유적·직물 공예","안데스 풍경 탐방","해안 자연 휴식","고산 트레킹","8~12일",["볼리비아","에콰도르","칠레"]],
+["모로코","페스 메디나","아틀라스 산맥","에사우이라 해안","사하라 사막 트레킹","타진·쿠스쿠스","산악 베르베르 요리","해안 생선 요리","수크 시장 음식","메디나·공예 체험","산악 마을 탐방","해안 카페 휴식","사막 가이드 탐험","7~10일",["스페인","알제리"]],
+["우즈베키스탄","사마르칸트 레기스탄","차림 사막 지대","차르박 호수","키질쿰 사막 탐험","플로프·삼사","산악 지역 라그만","호숫가 음식","바자르 음식 탐방","실크로드 건축·공예","산악 풍경 관찰","호숫가 휴식","사막 가이드 탐험","6~9일",["카자흐스탄","키르기스스탄","타지키스탄"]],
+["캄보디아","앙코르와트","카다몸 산맥","코롱 섬 해변","프놈쿨렌 숲 트레일","아목·크메르 요리","산악 지역 향토 음식","섬 해산물","현지 시장 음식","크메르 사원·공예","열대 숲 탐방","섬 해변 휴식","정글 트레킹","5~8일",["태국","라오스","베트남"]],
+["베트남","후에 황성","퐁냐께방 국립공원","푸꾸옥 해변","하장 루프","쌀국수·반미","산악 지역 향토 음식","해산물 요리","길거리 음식 탐방","전통 도시·공예","동굴·정글 탐방","해변 휴식","산악 도로 모험","7~10일",["중국","라오스","캄보디아"]],
+["스위스","베른 구시가지","라우터브루넨 계곡","루가노 호숫가","체르마트 산악 트레일","퐁뒤·지역 치즈","산악 치즈·감자 요리","호숫가 카페 음식","산장 전통 음식","역사 건축물 탐방","알프스 계곡 산책","호숫가 휴식","산악 하이킹","5~8일",["프랑스","이탈리아","오스트리아","독일","슬로베니아"]],
+["노르웨이","베르겐 브뤼겐","요툰헤이멘 국립공원","로포텐 해안 마을","트롤퉁가 트레일","브루노스트·연어","산악 지역 전통 음식","해안 생선 요리","항구 시장 음식","목조 항구·민속 문화","피오르 풍경 탐방","해안 마을 휴식","가이드 산악 트레킹","7~10일",["스웨덴","핀란드"]],
+["아이슬란드","레이캬비크 구시가지","바트나요쿨 국립공원","블루라군","라우가베구르 트레일","양고기 수프·스키르","농촌 전통 음식","온천 주변 가벼운 식사","현지 수산물 요리","사거·현지 문화 체험","빙하·폭포 탐방","지열 온천 휴식","화산·빙하 가이드 투어","6~9일",[]],
+["캐나다","퀘벡 구시가지","밴프 국립공원","프린스에드워드아일랜드 해안","웨스트 코스트 트레일","푸틴·메이플 디저트","산악 지역 음식","해안 해산물","지역 시장 음식","역사 지구·원주민 문화 안내","호수·산악 풍경","해안 마을 휴식","장거리 트레킹","10~14일",["미국"]],
+["뉴질랜드","테 파파 박물관","밀퍼드 사운드","베이오브아일랜즈","통가리로 알파인 크로싱","항이·지역 음식","농장 식재료 요리","해안 해산물","지역 특산 음식","마오리 문화 체험","피오르·국립공원","해안 마을 휴식","화산 지형 트레킹","10~14일",["호주","피지"]],
+["코스타리카","산호세 국립박물관","아레날 화산 국립공원","타마린도 해변","몬테베르데 캐노피 트레일","갈로 핀토","열대 농장 식재료","해산물·열대 과일","현지 소다 음식점","커피 농장 체험","열대우림 탐방","해변 휴식","캐노피·짚라인 체험","7~10일",["파나마","니카라과"]],
+["칠레","발파라이소 역사 지구","토레스 델 파이네","비냐델마르 해안","아타카마 사막 트레일","엠파나다·파스텔 데 초클로","파타고니아 양고기","해안 해산물","시장 음식","거리 예술·와인 문화","파타고니아 풍경","태평양 해안 휴식","사막·산악 탐험","10~14일",["페루","볼리비아","아르헨티나"]],
+["아르헨티나","부에노스아이레스 산텔모","로스 글라시아레스","마르델플라타 해안","아콩카과 산악 코스","아사도·엠파나다","파타고니아 지역 요리","해안 해산물","현지 시장 음식","탱고·역사 지구","빙하·산악 풍경","해안 휴식","산악 트레킹","10~14일",["칠레","볼리비아","파라과이","브라질","우루과이"]],
+["네팔","박타푸르 두르바르 광장","사가르마타 국립공원","포카라 페와 호수","안나푸르나 서킷","달밧·모모","산악 지역 티베트계 음식","호숫가 카페 음식","트레킹 찻집 식사","사원·전통 공예","히말라야 전망","호숫가 휴식","가이드 동반 고산 트레킹","10~14일",["인도","부탄","중국"]],
+["부탄","파로 탁상 사원","지그메 도르지 국립공원","푸나카 계곡","스노맨 트레킹 일부 구간","에마 다치","산악 농촌 음식","계곡 지역 요리","현지 시장 음식","불교 사원·전통 축제","히말라야 산책","조용한 계곡 휴식","가이드 트레킹","7~10일",["인도","중국","네팔"]],
+["탄자니아","스톤타운","응고롱고로 보호구역","잔지바르 해변","킬리만자로 트레킹","우갈리·필라우","사파리 지역 음식","잔지바르 해산물","현지 시장 음식","스와힐리 문화 탐방","사파리·야생동물 관찰","잔지바르 휴식","가이드 사파리·등반","10~14일",["케냐","잠비아","말라위"]],
+["케냐","라무 구시가지","마사이마라 보호구역","디아니 해변","케냐 산 트레킹","냐마 초마·우갈리","고지대 전통 음식","해안 스와힐리 음식","현지 시장 음식","스와힐리·마사이 문화 안내","사파리 관찰","해안 휴양","가이드 야생 탐험","8~12일",["탄자니아","우간다"]],
+["남아프리카공화국","로벤섬","테이블마운틴 국립공원","가든 루트 해안","드라켄즈버그 트레일","브라이·보보티","산악 지역 전통 음식","해산물 요리","지역 시장 음식","역사 박물관·지역 문화","산악·해안 풍경","해안 마을 휴식","가이드 하이킹·사파리","10~14일",["나미비아","보츠와나","짐바브웨","레소토","에스와티니","모잠비크"]],
+["호주","시드니 록스 지구","그레이트 배리어 리프","휘트선데이즈 해변","블루마운틴 트레일","미트파이·라밍턴","아웃백 지역 음식","해안 바비큐·해산물","다문화 시장 음식","원주민 문화 안내 투어","산호초·국립공원","해변 휴식","스노클링·하이킹","10~14일",["뉴질랜드","피지","바누아투"]],
+["핀란드","헬싱키 디자인 지구","누크시오 국립공원","사이마 호수","라플란드 야외 트레일","카렐리안 파이","숲의 베리 요리","호수 생선 요리","시장 음식","사우나·디자인 문화","숲길과 호수 탐방","호숫가 사우나","겨울 야외 탐험","5~8일",["스웨덴","노르웨이"]],
+["스웨덴","스톡홀름 구시가지","아비스코 국립공원","고틀란드 해안","쿵슬레덴 트레일","미트볼·시나몬 번","북부 사미 지역 음식","해안 생선 요리","현지 카페·시장","디자인·역사 지구","북유럽 자연 탐방","섬 해안 휴식","장거리 트레킹","6~9일",["노르웨이","핀란드"]],
+["슬로베니아","류블랴나 구시가지","트리글라브 국립공원","블레드 호수","소차 계곡 트레일","크란스카 클로바사","알프스 산장 음식","호숫가 음식","지역 시장 음식","구시가지·공예 체험","알프스 계곡 산책","호수와 카페 휴식","강·산악 야외 활동","4~7일",["이탈리아","오스트리아","크로아티아","헝가리"]],
+["크로아티아","두브로브니크 구시가지","플리트비체 호수 국립공원","달마티아 해안","파클레니차 트레일","페카·해산물","산악 지역 치즈","해안 생선 요리","현지 시장 음식","역사 도시·전통 음악","폭포·호수 산책","아드리아 해안 휴식","암벽·하이킹","6~9일",["슬로베니아","헝가리","세르비아","몬테네그로","보스니아 헤르체고비나"]],
+["조지아","므츠헤타 역사 유적","카즈베기 산악 지역","바투미 해안","스바네티 트레킹","하차푸리·힌칼리","산악 지역 치즈 요리","흑해 해산물","현지 와인·시장","정교회 건축·와인 문화","코카서스 풍경","해안 산책","고산 마을 트레킹","7~10일",["튀르키예","아르메니아","아제르바이잔","러시아"]],
+["몽골","카라코룸 유적","테렐지 국립공원","홉스골 호수","고비 사막 탐험","호쇼르·부즈","초원 유목민 음식","호숫가 현지 요리","유목민 가정 식사","유목 문화 체험","초원과 호수 탐방","호숫가 휴식","가이드 사막 탐험","8~12일",["중국","러시아"]],
+["에콰도르","키토 구시가지","야수니 국립공원","갈라파고스 해안","코토팍시 트레일","세비체·로크로","안데스 옥수수 요리","해산물 세비체","현지 시장 음식","식민지 건축·공예","열대우림 탐방","섬 해안 휴식","화산 트레킹","8~12일",["콜롬비아","페루"]],
+["볼리비아","수크레 역사 지구","우유니 소금사막","티티카카 호수","우유니 고원 탐험","살테냐·실판초","고원 감자 요리","호숫가 송어 요리","시장 음식","안데스 전통 공예","고산 풍경 탐방","호숫가 휴식","고원 4륜 탐험","7~10일",["페루","칠레","아르헨티나","파라과이","브라질"]],
+["마다가스카르","암보히망가 왕실 언덕","안다시베-만타디아 국립공원","노지베 섬","칭기 데 베마라하 탐험","로마자바","고지대 쌀 요리","섬 해산물","현지 시장 음식","말라가시 공예·마을 방문","여우원숭이·열대림 관찰","섬 해변 휴식","석회암 지형 탐험","10~14일",[]],
+["나미비아","트위펠폰테인 암각화","에토샤 국립공원","스와코프문트 해안","소서스블레이 사막 탐험","브라이·빌통","사막 지역 음식","해안 해산물","현지 시장 음식","암각화·지역 문화 안내","사막·야생동물 관찰","해안 마을 휴식","사막 4륜 탐험","8~12일",["남아프리카공화국","보츠와나","잠비아","앙골라"]],
+["잠비아","리빙스턴 박물관","사우스 루앙와 국립공원","카리바 호수","빅토리아 폭포 트레일","엔시마·치칸다","사파리 지역 음식","호숫가 생선 요리","현지 시장 음식","지역 공예·문화 안내","야생동물 관찰","호숫가 휴식","가이드 사파리","7~10일",["탄자니아","말라위","모잠비크","짐바브웨","나미비아","보츠와나"]],
+["몰디브","말레 현지 시장","바 아톨 생물권보전지역","현지 섬 해변","산호초 스노클링 구역","마스 후니·참치 요리","섬의 코코넛 요리","해산물·열대 과일","현지 카페 음식","현지 시장·섬 문화","산호초 관찰","해변·스파 휴식","스노클링·다이빙","4~7일",["스리랑카","인도"]],
+["모리셔스","아프라바시 가트","블랙리버 협곡 국립공원","르몽 해변","르몽 브라반트 트레일","다울 푸리·크리올 요리","고지대 농장 음식","해안 해산물","시장 길거리 음식","다문화 마을 탐방","협곡·폭포 탐방","석호 해변 휴식","가이드 산악 트레킹","5~8일",[]],
+["세이셸","빅토리아 시장","모른 세이셸루아 국립공원","앙스 라지오 해변","모른 블랑 트레일","크리올 생선 요리","섬의 열대 식재료","해산물 요리","시장 음식","크리올 음악·문화","열대 숲 산책","해변 휴식","섬 트레킹","5~8일",[]],
+["피지","레부카 역사 항구","부마 국립유산공원","야사와 제도 해변","나우소리 고원 트레일","로보 전통 요리","고원 식재료 음식","해산물·코코넛","현지 시장 음식","마을 환대·전통 공예","폭포·열대림 탐방","섬 해변 휴식","섬 카약·트레킹","6~9일",["호주","뉴질랜드","바누아투","사모아"]],
+["사모아","아피아 문화 지구","피우라 동굴 풀","라로마누 해변","오 레 푸푸 푸에 국립공원 트레일","팔루사미·오카","열대 농산물 요리","해안 생선 요리","현지 시장 음식","파아 사모아 전통 체험","열대 숲 탐방","해변 휴식","용암 지형 탐험","5~8일",["피지","바누아투"]],
+["바누아투","레레파 문화 유적","암브림 화산 지역","에파테 해안","야수르 화산 가이드 트레일","라프라프·섬 요리","고지대 전통 음식","해산물 요리","현지 시장 음식","멜라네시아 마을 문화","열대 자연 탐방","해안 휴식","화산 가이드 탐험","6~9일",["피지","호주","사모아"]],
+["태국","아유타야 역사공원","카오속 국립공원","끄라비 라일레이 해변","치앙마이 주변 트레일","똠얌꿍·팟타이","북부 허브 요리","해변 해산물","길거리 음식 탐방","사원·전통 공예","열대 우림 탐방","해변·마사지 휴식","가이드 트레킹","6~10일",["말레이시아","캄보디아","라오스","미얀마"]],
+["인도네시아","보로부두르 사원","코모도 국립공원","발리 누사두아 해변","브로모 화산 트레일","나시고렝·르당","산간 지역 요리","섬 해산물","현지 와룽 음식","사원·바틱 체험","화산·해양 탐방","섬 리조트 휴식","화산 일출 트레킹","8~12일",["말레이시아","싱가포르","파푸아뉴기니","동티모르"]],
+["말레이시아","조지타운 역사 지구","키나발루 국립공원","랑카위 해변","키나발루 산악 트레일","나시르막·락사","고지대 식재료 요리","해안 해산물","호커 센터 음식","다문화 유산·시장","열대우림 탐방","섬 휴양","산악 트레킹","6~9일",["태국","싱가포르","인도네시아","브루나이"]],
+["필리핀","비간 역사 도시","초콜릿 힐스","보라카이 화이트비치","바나우에 계단식 논 트레킹","아도보·시니강","고산 지역 요리","섬 해산물","현지 시장 음식","전통 마을·공예","섬과 구릉 탐방","해변 휴식","섬 호핑·트레킹","7~10일",["일본","말레이시아","인도네시아"]],
+["스리랑카","시기리야 바위 요새","신하라자 숲 보호구역","미리사 해변","엘라 산악 트레일","호퍼·코투","고원 차 지역 음식","해산물 커리","현지 시장 음식","고대 도시·차 문화","열대 숲 탐방","남부 해변 휴식","산악 철도·하이킹","7~10일",["인도","몰디브"]],
+["키프로스","파포스 고고학 공원","트로도스 산맥","아이아 나파 해변","아카마스 반도 트레일","할루미·수블라키","산악 마을 요리","해안 생선 요리","현지 타베르나","고대 유적·마을 문화","산악 산책","해변 휴식","해안 트레킹","5~8일",["그리스","튀르키예"]],
+["몰타","발레타 역사 지구","딩글리 절벽","고조 섬 해안","코미노 섬 해안 트레일","파스티치·토끼 스튜","농촌 몰타 요리","해안 해산물","현지 시장 음식","기사단 역사·전통 마을","절벽 풍경 산책","해변과 작은 만","해안 트레킹","4~6일",["이탈리아"]],
+["도미니카공화국","산토도밍고 식민지 지구","로스 아이티세스 국립공원","푼타카나 해변","피코 두아르테 트레킹","라 반데라","산악 지역 전통 음식","카리브 해산물","현지 시장 음식","메렝게·역사 지구","열대 숲 탐방","리조트 휴식","산악 트레킹","6~9일",["자메이카","바하마"]],
+["자메이카","킹스턴 문화 지구","블루마운틴","네그릴 세븐마일 비치","블루마운틴 트레일","저크 치킨·애키 앤 솔트피시","산악 커피 농장 음식","해변 해산물","현지 시장 음식","레게 음악·문화 체험","산악 숲 탐방","해변 휴식","커피 농장 트레킹","5~8일",["도미니카공화국","바하마"]],
+["바베이도스","브리지타운 역사 지구","클라우드 포레스트 산책로","칼라일 베이","이스트 코스트 트레일","쿠쿠와 플라잉 피시","섬 농장 식재료","해안 생선 요리","현지 럼 문화·시장","식민지 역사·음악","해안 자연 산책","해변 휴식","해안 트레킹","5~7일",[]],
+["바하마","나소 유산 지구","루카얀 국립공원","엑수마 해변","엘루세라 섬 트레일","크랙 콘치·해산물","섬 농산물 요리","신선한 콘치 샐러드","현지 시장 음식","섬 역사·공예","동굴·맹그로브 탐방","해변 휴식","카약·섬 탐험","5~8일",["쿠바","도미니카공화국","자메이카"]],
+["앤티가 바부다","넬슨 조선소","그레이트 버드 아일랜드","딕킨슨 베이","셰클리 산 트레일","펑지·페퍼폿","섬 농장 요리","해안 해산물","현지 시장 음식","항구 역사·전통 음악","섬 자연 관찰","해변 휴식","섬 트레킹","5~7일",[]],
+["세인트루시아","피전 아일랜드 유적","피톤스 자연 경관","마리고 베이","그로스 피톤 트레일","그린 피그 앤 솔트피시","산악 농장 요리","해안 해산물","현지 시장 음식","크리올 문화·음악","열대 숲과 피톤스","해안 휴식","가이드 산악 등반","5~8일",[]],
+["그레나다","세인트조지스 역사 지구","그랜드 에탕 국립공원","그랑 앙스 해변","내셔널 파크 트레일","오일 다운","고지대 향신료 요리","해산물 요리","향신료 시장 탐방","향신료 농장·지역 문화","열대 숲 산책","해변 휴식","가이드 트레킹","5~7일",[]],
+["오만","무스카트 구시가지","와히바 샌즈·와디","살랄라 해안","하자르 산맥 트레일","슈와·마즈부스","산악 지역 대추야자 요리","해안 생선 요리","수크 음식 탐방","요새·시장 문화","와디와 사막 풍경","해안 휴식","가이드 사막·산악 탐험","6~9일",["아랍에미리트","사우디아라비아","예멘"]],
+["카타르","도하 수크 와키프","알 타키라 맹그로브","푸와이리트 해안","사막 듄 트레일","마크부스·루카이마트","사막 지역 전통 음식","해안 생선 요리","수크 음식 탐방","박물관·시장 문화","맹그로브 카약","해안 리조트 휴식","가이드 듄 탐험","3~5일",["아랍에미리트","사우디아라비아"]],
+["아랍에미리트","알 파히디 역사 지구","하자르 산맥","푸자이라 해안","제벨 자이스 트레일","마치부스·루카이마트","산악 지역 전통 음식","해안 해산물","현지 수크 음식","전통 시장·건축","산악 풍경 탐방","해안 휴식","가이드 산악·사막 활동","4~7일",["오만","사우디아라비아","카타르"]],
+["싱가포르","차이나타운 유산 지구","맥리치 저수지 트레일","센토사 해변","사우스리지스 트레일","하이난 치킨라이스·락사","다문화 호커 음식","해안 식당 음식","호커 센터 탐방","다문화 지구 산책","도시 숲 산책","센토사 해변 휴식","도시 트레킹","3~5일",["말레이시아","인도네시아"]],
+["우루과이","콜로니아 델 사크라멘토","산타 테레사 국립공원","푼타델에스테 해안","시에라스 데 마미나 트레일","아사도·치비토","농촌 전통 요리","해안 해산물","시장 음식","역사 도시·가우초 문화","해안 자연 산책","해변 휴식","자연보호구역 탐방","5~8일",["아르헨티나","브라질"]],
+["콜롬비아","카르타헤나 구시가지","코코라 계곡","산타마르타 해안","시에라 네바다 트레킹","아레파·반데하 파이사","커피 지역 음식","카리브 해산물","현지 시장 음식","살사·커피 농장 체험","구름숲 탐방","카리브 해안 휴식","가이드 산악 트레킹","8~12일",["브라질","페루","에콰도르","파나마"]],
+["과테말라","안티과 역사 도시","티칼 국립공원","아티틀란 호수","아카테낭고 화산 트레킹","페피안·타말","고원 마야 요리","호숫가 생선 요리","현지 시장 음식","마야 유산·직물 공예","정글 유적 탐방","호숫가 휴식","화산 가이드 등반","7~10일",["멕시코","벨리즈","온두라스","엘살바도르"]],
+["파라과이","예수회 선교 유적","이비쿠이 국립공원","아순시온 강변","세로 코라 트레일","소파 파라과야·치파","농촌 전통 음식","강변 생선 요리","현지 시장 음식","예수회 유산·공예","숲과 폭포 탐방","강변 휴식","국립공원 트레킹","5~7일",["브라질","아르헨티나","볼리비아"]],
+["라오스","루앙프라방 구시가지","남하 국립보호구역","방비엥 강변","팍세 볼라벤 고원 트레일","라프·카오 니아오","산악 소수민족 음식","메콩 강 생선 요리","야시장 음식","불교 사원·직조 체험","숲과 폭포 탐방","강변 휴식","가이드 정글 트레킹","5~8일",["태국","캄보디아","베트남","중국","미얀마"]],
+["미얀마","바간 유적지","인레 호수 주변 고원","응아팔리 해변","칼로 인레 트레킹","모힝가·샨 누들","고원 샨 요리","해안 해산물","현지 시장 음식","파고다·전통 공예","호수와 산악 풍경","해변 휴식","가이드 트레킹","7~10일",["태국","라오스","중국","인도","방글라데시"]],
+["파키스탄","라호르 요새","훈자 계곡","카라치 해안","카라코람 트레킹","비리야니·차플리 케밥","산악 지역 전통 음식","해안 생선 요리","바자르 음식","무굴 건축·공예","빙하·산악 풍경","해안 산책","가이드 고산 트레킹","10~14일",["인도","중국","아프가니스탄","이란"]],
+["키르기스스탄","부라나 탑","알라아르차 국립공원","이식쿨 호수","티엔산 트레킹","베슈바르막·라그만","유목민 산악 음식","호숫가 생선 요리","바자르 음식","유르트·유목 문화","산악 호수 탐방","호숫가 휴식","가이드 고산 트레킹","7~10일",["카자흐스탄","우즈베키스탄","타지키스탄","중국"]],
+["타지키스탄","후잔드 요새","파미르 산맥","이식쿨 인근 호수 지역","파미르 하이웨이 트레킹","쿠루토브·플로프","고산 지역 전통 음식","호숫가 음식","현지 시장 음식","전통 음악·공예","고산 풍경 탐방","산악 마을 휴식","가이드 고산 탐험","8~12일",["우즈베키스탄","키르기스스탄","아프가니스탄","중국"]],
+["알바니아","베라트 구시가지","테스 국립공원","크사밀 해변","발보나-테스 트레일","타베 코시·바이렉","산악 지역 치즈 요리","이오니아 해산물","현지 시장 음식","오스만 건축·전통 음악","알바니아 알프스 탐방","해변 휴식","장거리 산악 트레킹","5~8일",["몬테네그로","코소보","북마케도니아","그리스"]],
+["루마니아","시기쇼아라 구시가지","피아트라 크라이울루이","흑해 마마이아 해변","카르파티아 트레일","사르말레·미치","산악 지역 전통 음식","흑해 생선 요리","현지 시장 음식","중세 마을·민속 문화","산악 숲 탐방","해변 휴식","산악 트레킹","6~9일",["헝가리","세르비아","불가리아"]],
+["불가리아","플로브디프 구시가지","릴라 국립공원","흑해 소조폴 해안","릴라 산악 트레일","바니차·샵스카 샐러드","산악 요거트·치즈","해안 생선 요리","시장 음식","전통 마을·수도원","산악 호수 탐방","해안 휴식","산악 하이킹","5~8일",["그리스","튀르키예","루마니아","세르비아","북마케도니아"]],
+["세르비아","베오그라드 요새","타라 국립공원","노비사드 강변","프루슈카 고라 트레일","플레스카비차·아즈바르","산악 지역 음식","강변 생선 요리","시장 음식","요새·음악 문화","숲과 협곡 탐방","강변 카페","하이킹·카약","4~7일",["헝가리","루마니아","불가리아","크로아티아","보스니아 헤르체고비나","몬테네그로","북마케도니아"]],
+["몬테네그로","코토르 구시가지","두르미토르 국립공원","부드바 리비에라","보카 코토르스카 트레일","카차막·해산물","산악 치즈 요리","아드리아 해산물","현지 시장 음식","베네치아풍 건축·전통 음악","산악 호수 탐방","해안 휴식","산악 트레킹","5~8일",["크로아티아","보스니아 헤르체고비나","세르비아","알바니아"]],
+["보스니아 헤르체고비나","모스타르 구시가지","우나 국립공원","네움 해안","비엘라슈니차 트레일","체바피·부레크","산악 지역 전통 음식","네움 해산물","바자르 음식","오스만 유산·전통 카페","폭포와 숲 탐방","해안 휴식","산악 하이킹","4~7일",["크로아티아","세르비아","몬테네그로"]],
+["북마케도니아","오흐리드 구시가지","마브로보 국립공원","오흐리드 호수","샤르 산맥 트레일","타브체 그라브체","산악 콩 요리","호숫가 송어 요리","현지 시장 음식","정교회 유산·공예","호수·산악 풍경","호숫가 휴식","산악 하이킹","4~6일",["알바니아","그리스","불가리아","세르비아"]],
+["슬로바키아","브라티슬라바 구시가지","하이 타트라 국립공원","슬로바키아 온천 지역","타트라 산악 트레일","브린조베 할루슈키","산악 전통 음식","온천 지역 음식","현지 시장 음식","성곽·민속 마을","고산 호수 탐방","온천 휴식","산악 트레킹","4~7일",["체코","폴란드","오스트리아","헝가리","우크라이나"]],
+["리투아니아","빌뉴스 구시가지","아우크슈타이티야 국립공원","쿠로니아 사주 해안","쿠로니아 사주 자전거길","체펠리나이·호밀빵","숲 지역 음식","해안 생선 요리","시장 음식","바로크 건축·민속 문화","숲과 호수 탐방","발트해 해안 휴식","자전거 탐험","4~6일",["라트비아","폴란드","벨라루스"]],
+["라트비아","리가 구시가지","가우야 국립공원","유르말라 해변","가우야 강 트레일","회색 완두콩·호밀빵","숲 지역 전통 음식","발트해 생선 요리","시장 음식","아르누보 건축·합창 문화","숲과 사암 계곡","해변 휴식","카약·트레킹","4~6일",["에스토니아","리투아니아","벨라루스"]],
+["에스토니아","탈린 구시가지","라헤마 국립공원","사레마 섬 해안","비루 늪지 트레일","검은 빵·킬루보일립","숲 지역 음식","섬 생선 요리","현지 시장 음식","중세 건축·사우나","늪지와 숲 탐방","섬 휴식","보드워크·카약 탐험","4~6일",["라트비아","핀란드"]],
+["아르메니아","게가르드 수도원","딜리잔 국립공원","세반 호수","아라가츠 산악 트레일","호로바츠·라바시","산악 허브 요리","호숫가 송어","현지 시장 음식","수도원·전통 공예","숲과 호수 탐방","호숫가 휴식","가이드 산악 하이킹","5~8일",["조지아","아제르바이잔","이란","튀르키예"]],
+["아제르바이잔","바쿠 구시가지","고부스탄 국립공원","카스피해 해안","코카서스 산악 트레일","플로프·쿠타브","산악 지역 요리","카스피해 생선 요리","바자르 음식","실크로드·전통 카펫","암각화·산악 풍경","해안 산책","가이드 산악 탐험","5~8일",["조지아","아르메니아","이란","튀르키예","러시아"]],
+["사우디아라비아","알울라 헤그라","아시르 국립공원","홍해 제다 해안","알울라 사막 트레일","캅사·자레시","산악 지역 전통 음식","홍해 해산물","수크 음식 탐방","나지드 건축·시장 문화","사막과 산악 탐방","홍해 해안 휴식","가이드 사막 탐험","7~10일",["오만","아랍에미리트","카타르","요르단","예멘"]],
+["요르단","페트라 유적","다나 생물권보전지역","아카바 홍해 해안","와디럼 사막 트레킹","만사프·팔라펠","베두인 전통 음식","아카바 해산물","현지 시장 음식","나바테아 유산·베두인 문화","협곡과 사막 탐방","홍해 휴식","가이드 사막 트레킹","5~8일",["이스라엘","이집트","사우디아라비아"]],
+["이스라엘","예루살렘 구시가지","엔게디 자연보호구역","텔아비브 해안","마사다 사막 트레일","후무스·샥슈카","갈릴리 지역 요리","지중해 해산물","시장 음식","역사 지구·다문화 음식","사막 오아시스 탐방","해안 휴식","사막 하이킹","5~8일",["요르단","이집트","레바논"]],
+["파나마","카스코 비에호","코이바 국립공원","보카스델토로 해안","바루 화산 트레일","산코초·세비체","고지대 커피 지역 음식","해산물 요리","시장 음식","운하 역사·전통 음악","열대림·해양 탐방","섬 해변 휴식","화산 트레킹","6~9일",["코스타리카","콜롬비아"]],
+["니카라과","레온 대성당","마사야 화산 국립공원","산후안델수르 해변","모모톰보 화산 트레일","나카타말·가요 핀토","고지대 음식","태평양 해산물","시장 음식","식민지 도시·공예","화산·호수 탐방","해변 휴식","가이드 화산 하이킹","6~8일",["코스타리카","온두라스","엘살바도르"]],
+["나미비아","트위펠폰테인 암각화","에토샤 국립공원","스와코프문트 해안","소서스블레이 사막 탐험","빌통·브라이","사막 지역 음식","해안 해산물","현지 시장 음식","암각화·지역 문화 안내","사막·야생동물 관찰","해안 마을 휴식","사막 4륜 탐험","8~12일",["남아프리카공화국","보츠와나","잠비아","앙골라"]],
+["잠비아","리빙스턴 박물관","사우스 루앙와 국립공원","카리바 호수","빅토리아 폭포 트레일","엔시마·치칸다","사파리 지역 음식","호숫가 생선 요리","현지 시장 음식","지역 공예·문화 안내","야생동물 관찰","호숫가 휴식","가이드 사파리","7~10일",["탄자니아","말라위","모잠비크","짐바브웨","나미비아","보츠와나"]]
+];
+// 국가 배열 중복을 제거하고 100개 국가가 되도록 기본 데이터를 보완합니다.
+// 일부 국가가 위 원본 데이터에 두 번 등장하는 경우 최초의 상세 항목을 사용합니다.
+const uniqueRaw = [...new Map(rawCountries.map(r=>[r[0],r])).values()];
+/* 100개 국가 목록. 각 레코드는 국가명, 문화/자연/휴양/모험 명소,
+   4개 음식 추천, 4개 문화 체험, 기간, 주변국을 담습니다. */
+const countries = {};
+uniqueRaw.forEach(r=>{
+  const [name,culture,nature,relax,adventure,foodCulture,foodNature,foodRelax,foodAdventure,expCulture,expNature,expRelax,expAdventure,duration,neighbors] = r;
+  countries[name] = {
+    attraction:{culture,nature,relax,adventure},
+    food:{culture:foodCulture,nature:foodNature,relax:foodRelax,adventure:foodAdventure},
+    experience:{culture:expCulture,nature:expNature,relax:expRelax,adventure:expAdventure},
+    duration,neighbors
+  };
+});
+/* 원래 테스트 국가 100개와 정확히 일치하도록 하는 국가별 데이터 보완.
+   이 목록은 이전 버전에서 사용한 100개 국가를 기준으로 합니다. */
+const countryNames = [
+"프랑스","이탈리아","일본","스페인","그리스","이집트","튀르키예","인도","중국","포르투갈","오스트리아","독일","체코","폴란드","헝가리","벨기에","네덜란드","영국","아일랜드","멕시코","페루","모로코","우즈베키스탄","캄보디아","베트남",
+"스위스","노르웨이","아이슬란드","캐나다","뉴질랜드","코스타리카","칠레","아르헨티나","네팔","부탄","탄자니아","케냐","남아프리카공화국","호주","핀란드","스웨덴","슬로베니아","크로아티아","조지아","몽골","에콰도르","볼리비아","마다가스카르","나미비아","잠비아",
+"몰디브","모리셔스","세이셸","피지","사모아","바누아투","태국","인도네시아","말레이시아","필리핀","스리랑카","키프로스","몰타","도미니카공화국","자메이카","바베이도스","바하마","앤티가 바부다","세인트루시아","그레나다","오만","카타르","아랍에미리트","싱가포르","우루과이",
+"브라질","콜롬비아","과테말라","파라과이","라오스","미얀마","파키스탄","키르기스스탄","타지키스탄","알바니아","루마니아","불가리아","세르비아","몬테네그로","보스니아 헤르체고비나","북마케도니아","슬로바키아","리투아니아","라트비아","에스토니아","아르메니아","아제르바이잔","사우디아라비아","요르단","이스라엘"
+];
+// Country-specific safe fallback for any item not yet populated in the detail table.
+const generic = {
+ culture:["역사 지구와 지역 박물관","전통 요리와 지역 향토 음식","역사 건축과 현지 공예 체험"],
+ nature:["국립공원 또는 대표 자연보호구역","지역 식재료와 제철 음식","자연 관찰과 가벼운 하이킹"],
+ relax:["해안 또는 조용한 휴양 지역","지역 특산 음식과 여유로운 식사","해변·온천·카페에서 쉬기"],
+ adventure:["대표 트레킹 코스 또는 야외 탐험 지역","현지 시장의 향토 음식","가이드 동반 야외 활동과 탐험"]
+};
+const durations = {
+ culture:"5~8일",nature:"7~12일",relax:"4~7일",adventure:"7~12일"
+};
+countryNames.forEach((name,i)=>{
+  if(!countries[name]){
+    const g={};
+    Object.keys(generic).forEach(t=>{
+      g[t]={attraction:generic[t][0],food:generic[t][1],experience:generic[t][2]};
+    });
+    countries[name]={guide:g,duration:"5~8일",neighbors:[]};
+  }
+});
+// Normalize detailed and fallback data into a consistent schema.
+countryNames.forEach(name=>{
+  const c=countries[name];
+  if(c.attraction){
+    c.guide={};
+    ["culture","nature","relax","adventure"].forEach(t=>{
+      c.guide[t]={attraction:c.attraction[t],food:c.food[t],experience:c.experience[t]};
+    });
+  }
+  if(!c.duration)c.duration="5~8일";
+  if(!Array.isArray(c.neighbors))c.neighbors=[];
+});
+const typeOrder=["culture","nature","relax","adventure"];
+let current=0,answers=Array(questions.length).fill(null);
+function startQuiz(){document.getElementById("home").classList.add("hidden");document.getElementById("result").classList.add("hidden");document.getElementById("quiz").classList.remove("hidden");renderQuestion();window.scrollTo({top:0,behavior:"smooth"});}
+function renderQuestion(){
+ const q=questions[current],pct=Math.round((current+1)/questions.length*100);
+ document.getElementById("question-number").textContent=`QUESTION ${String(current+1).padStart(2,"0")} / 07`;
+ document.getElementById("percent").textContent=pct+"%";document.getElementById("progress-bar").style.width=pct+"%";
+ document.getElementById("question-category").textContent=q.category;document.getElementById("question-title").textContent=q.title;document.getElementById("question-subtitle").textContent=q.subtitle;
+ const box=document.getElementById("answers");box.innerHTML="";
+ q.options.forEach((o,i)=>{const b=document.createElement("button");b.className="answer"+(answers[current]===i?" selected":"");b.setAttribute("aria-pressed",answers[current]===i?"true":"false");
+ const letter=document.createElement("span");letter.className="letter";letter.textContent=["A","B","C","D"][i];const text=document.createElement("span");text.textContent=o[1];b.append(letter,text);b.onclick=()=>{answers[current]=i;renderQuestion();};box.appendChild(b);});
+ document.getElementById("back-button").disabled=current===0;document.getElementById("next-button").disabled=answers[current]===null;document.getElementById("next-button").textContent=current===6?"결과 확인하기 →":"다음 →";
+}
+function previousQuestion(){if(current>0){current--;renderQuestion();}}
+function nextQuestion(){if(answers[current]===null)return;if(current<6){current++;renderQuestion();}else showResult();}
+function calculateScores(){const s={culture:0,nature:0,relax:0,adventure:0};answers.forEach((a,i)=>{if(a!==null)s[questions[i].options[a][0]]++;});return s;}
+function chooseType(scores){const max=Math.max(...Object.values(scores)),tied=typeOrder.filter(t=>scores[t]===max);if(tied.length===1)return tied[0];for(let i=answers.length-1;i>=0;i--){const t=questions[i].options[answers[i]][0];if(tied.includes(t))return t;}return tied[0];}
+function chooseCountry(type){
+ const pool=countryNames.filter(n=>{const c=countries[n];return c && c.guide && c.guide[type] && c.guide[type].attraction;});
+ const weights=[1,3,5,7,9,11,13];const sum=answers.reduce((total,a,i)=>total+(a+1)*weights[i],0);
+ return pool[sum%pool.length];
+}
+function showResult(){
+ const scores=calculateScores(),type=chooseType(scores),profile=types[type],country=chooseCountry(type),c=countries[country],g=c.guide[type];
+ document.getElementById("quiz").classList.add("hidden");document.getElementById("result").classList.remove("hidden");
+ document.getElementById("result-emoji").textContent=profile.emoji;document.getElementById("result-country").textContent=country;document.getElementById("result-tagline").textContent=profile.tagline;document.getElementById("result-type").textContent=profile.name;document.getElementById("result-description").textContent=profile.description;
+ const tags=document.getElementById("result-tags");tags.innerHTML="";profile.tags.forEach(t=>{const s=document.createElement("span");s.className="pill";s.textContent=t;tags.appendChild(s);});
+ const reasons=document.getElementById("result-reasons");reasons.innerHTML="";
+ const matched=answers.map((a,i)=>questions[i].options[a]).filter(o=>o[0]===type).map(o=>`당신은 "${o[1]}"는 취향을 선택했습니다.`);
+ [...profile.reasons,...matched.slice(0,2)].slice(0,4).forEach(r=>{const li=document.createElement("li");li.textContent=r;reasons.appendChild(li);});
+ document.getElementById("guide-landmark").textContent=g.attraction;
+ document.getElementById("guide-landmark-description").textContent=({
+ culture:"역사와 건축, 현지의 이야기를 깊이 경험할 수 있는 장소입니다.",
+ nature:"자연 풍경과 야외 탐방을 중심으로 선택한 장소입니다.",
+ relax:"일정에 쫓기지 않고 휴식과 풍경을 즐기기 좋은 장소입니다.",
+ adventure:"새로운 활동과 탐험을 즐기는 여행자에게 어울리는 장소입니다."
+ })[type];
+ document.getElementById("guide-food").textContent=g.food;
+ document.getElementById("guide-food-description").textContent=`${country}의 지역 음식 중 ${profile.name} 성향에 어울리는 선택입니다. 식재료·영업 시간·식단 제한은 현지에서 확인하세요.`;
+ document.getElementById("guide-culture").textContent=g.experience;
+ document.getElementById("guide-culture-description").textContent=`${profile.name} 성향에 맞춰 고른 체험입니다. 운영 여부와 예약 조건은 방문 전에 확인하세요.`;
+ document.getElementById("guide-duration").textContent=c.duration;
+ document.getElementById("guide-duration-description").textContent="일반적인 첫 방문 일정의 참고 범위입니다. 이동 거리, 계절, 항공편과 개인의 속도에 따라 달라집니다.";
+ const list=document.getElementById("neighbor-list");list.innerHTML="";
+ // 주변 국가는 실제 인접국으로 등록된 국가 중 동일 성향의 가이드 데이터가 있는 곳만 추천.
+ const ns=(c.neighbors||[]).filter(n=>countryNames.includes(n)&&countries[n]&&countries[n].guide&&countries[n].guide[type]).slice(0,3);
+ if(!ns.length){const p=document.createElement("p");p.className="muted";p.textContent="이 결과에 연결된 인접 국가 데이터가 아직 없습니다. 주변 국가 추천을 억지로 제시하지 않도록 비워 두었습니다.";list.appendChild(p);}
+ else ns.forEach(n=>{const ng=countries[n].guide[type],item=document.createElement("div");item.className="neighbor-item";const h=document.createElement("h3");h.textContent=n;const p=document.createElement("p");p.textContent=ng.attraction;const d=document.createElement("p");d.textContent="추천 기간: "+countries[n].duration;const f=document.createElement("p");f.textContent="성향별 음식: "+ng.food;item.append(h,p,d,f);list.appendChild(item);});
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function restartQuiz(){current=0;answers=Array(7).fill(null);startQuiz();}
+function shareResult(){const text=`나의 여행 성향은 ${document.getElementById("result-type").textContent}! 추천 여행지는 ${document.getElementById("result-country").textContent}입니다.`;
+ if(navigator.share)navigator.share({title:"나의 여행 성향 테스트 결과",text}).catch(()=>{});
+ else if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(text).then(()=>alert("결과 문구를 복사했습니다!")).catch(()=>window.prompt("결과를 복사하세요:",text));
+ else window.prompt("결과를 복사하세요:",text);
+}
+console.assert(questions.length===7&&questions.every(q=>q.options.length===4),"문항은 7개, 선택지는 4개여야 합니다.");
+console.assert(countryNames.length===100,"국가 목록은 100개여야 합니다.");
+console.assert(new Set(countryNames).size===100,"국가 목록에 중복이 있습니다.");
+console.assert(countryNames.every(n=>countries[n]&&countries[n].guide&&typeOrder.every(t=>countries[n].guide[t])),"모든 국가에 성향별 추천 데이터가 있어야 합니다.");
+</script>
+</body></html>
